@@ -5,11 +5,8 @@
 
 |||
 |:-:|:-:|
-|Python Version|3.11 or last|
-|Packages|CustomTkinter, Pyglet|
+|Python Version|3.11+|
+|Packages|CustomTkinter|
 |FontTexts|[SpeedyOrc-C](https://github.com/SpeedyOrc-C/HoYo-Glyphs)|
 |Images|Owned by [HoYoVerse](https://www.hoyoverse.com/)|
 
->Command for all packages  
-
-```pip install customtkinter pyglet```
