@@ -1,0 +1,25 @@
+from PIL import Image
+from customtkinter import CTkImage
+
+img_cn_flag = CTkImage(Image.open('utils/images/cn.png'),size=(50,50))
+img_de_flag = CTkImage(Image.open('utils/images/de.png'),size=(50,50))
+img_en_flag = CTkImage(Image.open('utils/images/en.png'),size=(50,50))
+img_fr_flag = CTkImage(Image.open('utils/images/fr.png'),size=(50,50))
+img_id_flag = CTkImage(Image.open('utils/images/id.png'),size=(50,50))
+img_it_flag = CTkImage(Image.open('utils/images/it.png'),size=(50,50))
+img_jp_flag = CTkImage(Image.open('utils/images/jp.png'),size=(50,50))
+img_kr_flag = CTkImage(Image.open('utils/images/kr.png'),size=(50,50))
+img_pt_flag = CTkImage(Image.open('utils/images/pt.png'),size=(50,50))
+img_ru_flag = CTkImage(Image.open('utils/images/ru.png'),size=(50,50))
+img_sp_flag = CTkImage(Image.open('utils/images/sp.png'),size=(50,50))
+img_th_flag = CTkImage(Image.open('utils/images/th.png'),size=(50,50))
+img_tr_flag = CTkImage(Image.open('utils/images/tr.png'),size=(50,50))
+img_tw_flag = CTkImage(Image.open('utils/images/tw.png'),size=(50,50))
+img_vt_flag = CTkImage(Image.open('utils/images/vt.png'),size=(50,50))
+
+img_ch_lang = CTkImage(Image.open('utils/images/ch_lang.png'),size=(551,60))
+img_jp_lang = CTkImage(Image.open('utils/images/jp_lang.png'),size=(551,60))
+img_kr_lang = CTkImage(Image.open('utils/images/kr_lang.png'),size=(551,60))
+img_ru_lang = CTkImage(Image.open('utils/images/ru_lang.png'),size=(551,60))
+img_th_lang = CTkImage(Image.open('utils/images/th_lang.png'),size=(551,60))
+img_tw_lang = CTkImage(Image.open('utils/images/tw_lang.png'),size=(551,60))
