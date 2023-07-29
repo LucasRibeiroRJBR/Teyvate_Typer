@@ -1,5 +1,7 @@
 import customtkinter as ctk
-import tkinter.font as tkfont
+from PIL import Image
+from tkinter import Label   
+
 
 class App(ctk.CTk):
     def __init__(self):
@@ -14,8 +16,10 @@ class App(ctk.CTk):
 
         self.geometry(f'{self.w_width}x{self.w_height}+{int(x)}+{int(y)}')
 
+        # Textfont declarations
         self.mondstadt = ("Teyvat Neue",30)
         self.genshin = ("HYWenHei-85W",36,'bold')
+        self.genshin_dropdown = ("HYWenHei-85W",16,'bold')
         self.small_font = ('HYWenHei-85W', 30,'bold')
         self.teyvat = ("Teyvat Neue", 30)
         self.inazuma = ("Inazuma Neue", 30)
@@ -23,10 +27,20 @@ class App(ctk.CTk):
         self.deshret = ("Deshret Neue", 30)
         self.khaenriah = ("Khaenriah Neue", 30)
         self.khaenriah_charm = ("Khaenriah Neue Chasm", 30)
+
+        # Images decalrations
+        self.img_en_flag = ctk.CTkImage(Image.open('img/en.png'),size=(50,50))
+        self.img_sp_flag = ctk.CTkImage(Image.open('img/sp.png'),size=(50,50))
+        self.img_pt_flag = ctk.CTkImage(Image.open('img/pt.png'),size=(50,50))
+        self.img_jp_flag = ctk.CTkImage(Image.open('img/jp.png'),size=(50,50))
         
         self.vText = ctk.StringVar()
 
         self.lb_title = ctk.CTkLabel(master=self,text='Type your text below',font=self.genshin)
+
+        self.lb_flag = ctk.CTkLabel(master=self,text='',image=self.img_en_flag,width=50,height=50)
+        self.cbx_lang = ctk.CTkComboBox(master=self,values=['English','Spanish','Portuguese','Japanese'],font=self.genshin_dropdown,dropdown_font=self.genshin_dropdown,command=self.lang)
+        self.cbx_lang.set('English')
         
         # Frame
         self.frame_text = ctk.CTkFrame(master=self,border_width=3,width=180,height=400)
@@ -48,7 +62,9 @@ class App(ctk.CTk):
         # GRIDs
         self.grid_rowconfigure((0,1,2,3,4),weight=1)
         self.grid_columnconfigure((0,1,2,3,4,5),weight=1)
-        self.lb_title.grid(row=0,column=0,columnspan=6,padx=15,pady=15)
+        self.lb_title.grid(row=0,column=0,columnspan=5,padx=15,pady=15)
+        self.lb_flag.grid(row=0,column=4,sticky='e')
+        self.cbx_lang.grid(row=0,column=5,sticky='e',padx=(0,15))
         self.frame_text.grid(row=1,column=0,columnspan=6,padx=15,pady=15,sticky='nsew')
         self.rb_mondstadt.grid(row=2,column=0)
         self.rb_inazuma.grid(row=2,column=1)
@@ -80,7 +96,20 @@ class App(ctk.CTk):
             case 4: self.lb_letreiro.configure(font=self.khaenriah)
             case 5: self.lb_letreiro.configure(font=self.khaenriah_charm)
 
-
+    def lang(self,c):
+        match c:
+            case 'English':
+                self.lb_title.configure(text='Type your text below')
+                self.lb_flag.configure(image=self.img_en_flag)
+            case 'Spanish':
+                self.lb_title.configure(text='Escribe tu texto abajo')
+                self.lb_flag.configure(image=self.img_sp_flag)
+            case 'Portuguese':
+                self.lb_title.configure(text='Escreva seu texto abaixo')
+                self.lb_flag.configure(image=self.img_pt_flag)
+            case 'Japanese':
+                self.lb_title.configure(text="????????????????".encode('utf-8'))
+                self.lb_flag.configure(image=self.img_jp_flag)
 
 if __name__ == '__main__':
     App().mainloop()
