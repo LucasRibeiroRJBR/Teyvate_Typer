@@ -5,6 +5,15 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
 
+        self.w_width, self.w_height = 800, 800
+
+        self.screen_width, self.screen_height = self.winfo_screenwidth(), self.winfo_screenheight()
+
+        x = (self.screen_width / 2) - (self.w_width / 2)
+        y = (self.screen_height / 2 ) - (self.w_height / 2)
+
+        self.geometry(f'{self.w_width}x{self.w_height}+{int(x)}+{int(y)}')
+
         self.mondstadt = ("Teyvat Neue",30)
         self.genshin = ("HYWenHei-85W",36,'bold')
         self.small_font = ('HYWenHei-85W', 30,'bold')
@@ -14,18 +23,14 @@ class App(ctk.CTk):
         self.deshret = ("Deshret Neue", 30)
         self.khaenriah = ("Khaenriah Neue", 30)
         self.khaenriah_charm = ("Khaenriah Neue Chasm", 30)
-
-        self.w = 800
-        self.h = 600
-        self.geometry(f"{self.w}x{self.h}+{int(self.winfo_screenwidth())/2}+{int(self.winfo_screenheight())/2}")
-        
         
         self.vText = ctk.StringVar()
 
         self.lb_title = ctk.CTkLabel(master=self,text='Type your text below',font=self.genshin)
         
-        self.frame_text = ctk.CTkFrame(master=self,border_width=3,width=180,height=500)
-        self.lb_letreiro = ctk.CTkLabel(master=self.frame_text,text='',font=self.small_font)
+        # Frame
+        self.frame_text = ctk.CTkFrame(master=self,border_width=3,width=180,height=400)
+        self.lb_letreiro = ctk.CTkLabel(master=self.frame_text,text='',font=self.mondstadt,justify='center',width=180,height=400,wraplength=700)
         
         # ButtonRadios
         self.radio_var = ctk.IntVar(value=0)
@@ -34,8 +39,7 @@ class App(ctk.CTk):
         self.rb_sumeru = ctk.CTkRadioButton(master=self, text="Sumeru", command=self.idiom, variable= self.radio_var, value=2)
         self.rb_deshret = ctk.CTkRadioButton(master=self, text="Deshret", command=self.idiom, variable= self.radio_var, value=3)
         self.rb_khaenriah = ctk.CTkRadioButton(master=self, text="Khaenriah", command=self.idiom, variable= self.radio_var, value=4)
-        self.rb_khaenriah_charm = ctk.CTkRadioButton(master=self, text="Khaenriah Charm", command=self.idiom, variable= self.radio_var, value=5)
-        
+        self.rb_khaenriah_charm = ctk.CTkRadioButton(master=self, text="Khaenriah Charm", command=self.idiom, variable= self.radio_var, value=5)        
         
         self.input_text = ctk.CTkEntry(master=self,textvariable=self.vText,width=750,font=self.small_font)
         self.bt_limpar = ctk.CTkButton(master=self,text='Limpar',command=lambda:self.limpar)
@@ -55,11 +59,10 @@ class App(ctk.CTk):
         self.input_text.grid(row=3,column=0,columnspan=6,pady=(0,15))
         self.bt_limpar.grid(row=4,column=0,columnspan=6)
 
-        self.frame_text.grid_rowconfigure(0,weight=1)
+        # Frame GRIDs
+        self.frame_text.grid_rowconfigure((0,1),weight=1)
         self.frame_text.grid_columnconfigure(0,weight=1)
         self.lb_letreiro.grid(row=0,column=0,padx=5,pady=5)
-
-
 
     def limpar(self):
         self.vText=''
