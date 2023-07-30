@@ -9,14 +9,10 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        self.w_width, self.w_height = 1200, 900
-
-        self.screen_width, self.screen_height = self.winfo_screenwidth(), self.winfo_screenheight()
-
-        x = (self.screen_width / 2) - (self.w_width / 2)
-        y = (self.screen_height / 2 ) - (self.w_height / 2)
-
-        self.geometry(f'{self.w_width}x{self.w_height}+{int(x)}+{int(y)}')
+        self.update_idletasks()
+        x = (self.winfo_screenwidth() // 2) - (1200 // 2)
+        y = (self.winfo_screenheight() // 2) - (800 // 2)
+        self.geometry('{}x{}+{}+{}'.format(1200, 800, x, y))
 
         self.vText = ctk.StringVar()
 
@@ -49,7 +45,7 @@ class App(ctk.CTk):
         self.rb_khaenriah_charm = ctk.CTkRadioButton(master=self, text="Khaenriah Charm", font = f.genshin_small, command=self.idiom, variable= self.radio_var, value=5)        
         
         self.input_text = ctk.CTkEntry(master=self,textvariable=self.vText,width=750,font=f.small_font)
-        self.bt_limpar = ctk.CTkButton(master=self,text='Limpar',command=lambda:self.limpar)
+        self.bt_limpar = ctk.CTkButton(master=self,text='Limpar',font=f.genshin_small,command=lambda:self.limpar)
         self.input_text.bind('<KeyRelease>',self.fill_frame)
 
         # GRIDs
