@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: iso-8859-1 -*-
 import customtkinter as ctk
 from utils import lang_flags as lf
 from utils import window_fonts as f
@@ -31,15 +33,20 @@ class App(ctk.CTk):
         # Frame
         self.frame_text = ctk.CTkFrame(master=self,border_width=3,width=180,height=400)
         self.lb_letreiro = ctk.CTkLabel(master=self.frame_text,text='',font=f.mondstadt,justify='center',width=180,height=400,wraplength=700)
+        self.vSliderTextSize = ctk.IntVar()
+        self.slider_text_size = ctk.CTkSlider(master=self.frame_text,from_=0,to=100,number_of_steps=100,command=self.font_size,orientation='vertical',variable=self.vSliderTextSize)
+        self.slider_text_size.set(18)
+        self.lb_TextFont = ctk.CTkLabel(master=self.frame_text,text=self.vSliderTextSize.get())
+        
         
         # ButtonRadios
         self.radio_var = ctk.IntVar(value=0)
-        self.rb_mondstadt = ctk.CTkRadioButton(master=self, text="Mondstadt", command=self.idiom, variable= self.radio_var, value=0)
-        self.rb_inazuma = ctk.CTkRadioButton(master=self, text="Inazuma", command=self.idiom, variable= self.radio_var, value=1)
-        self.rb_sumeru = ctk.CTkRadioButton(master=self, text="Sumeru", command=self.idiom, variable= self.radio_var, value=2)
-        self.rb_deshret = ctk.CTkRadioButton(master=self, text="Deshret", command=self.idiom, variable= self.radio_var, value=3)
-        self.rb_khaenriah = ctk.CTkRadioButton(master=self, text="Khaenriah", command=self.idiom, variable= self.radio_var, value=4)
-        self.rb_khaenriah_charm = ctk.CTkRadioButton(master=self, text="Khaenriah Charm", command=self.idiom, variable= self.radio_var, value=5)        
+        self.rb_mondstadt = ctk.CTkRadioButton(master=self, text="Mondstadt", font = f.genshin_small, command=self.idiom, variable= self.radio_var, value=0)
+        self.rb_inazuma = ctk.CTkRadioButton(master=self, text="Inazuma", font = f.genshin_small, command=self.idiom, variable= self.radio_var, value=1)
+        self.rb_sumeru = ctk.CTkRadioButton(master=self, text="Sumeru", font = f.genshin_small, command=self.idiom, variable= self.radio_var, value=2)
+        self.rb_deshret = ctk.CTkRadioButton(master=self, text="Deshret", font = f.genshin_small, command=self.idiom, variable= self.radio_var, value=3)
+        self.rb_khaenriah = ctk.CTkRadioButton(master=self, text="Khaenriah", font = f.genshin_small, command=self.idiom, variable= self.radio_var, value=4)
+        self.rb_khaenriah_charm = ctk.CTkRadioButton(master=self, text="Khaenriah Charm", font = f.genshin_small, command=self.idiom, variable= self.radio_var, value=5)        
         
         self.input_text = ctk.CTkEntry(master=self,textvariable=self.vText,width=750,font=f.small_font)
         self.bt_limpar = ctk.CTkButton(master=self,text='Limpar',command=lambda:self.limpar)
@@ -63,8 +70,11 @@ class App(ctk.CTk):
 
         # Frame GRIDs
         self.frame_text.grid_rowconfigure((0,1),weight=1)
-        self.frame_text.grid_columnconfigure(0,weight=1)
+        self.frame_text.grid_columnconfigure(0,weight=2)
+        self.frame_text.grid_columnconfigure(1,weight=1)
         self.lb_letreiro.grid(row=0,column=0,padx=5,pady=5)
+        self.slider_text_size.grid(row=0,column=1,sticky='se',padx=15)
+        self.lb_TextFont.grid(row=2,column=1,sticky='w',pady=15)
 
     def limpar(self):
         self.vText=''
@@ -72,6 +82,11 @@ class App(ctk.CTk):
     def fill_frame(self,event):
         t = self.input_text.get()
         self.lb_letreiro.configure(text=t)
+
+    def font_size(self,v):
+        self.lb_TextFont.configure(text=self.vSliderTextSize.get())
+    def send_size(self):
+        return self.vSliderTextSize.get()
 
     def idiom(self):
         match self.radio_var.get():
@@ -87,21 +102,26 @@ class App(ctk.CTk):
             case 'English':
                 self.lb_title.configure(image='',text='Type your text below')
                 self.lb_flag.configure(image=lf.img_en_flag)
+                self.bt_limpar.configure(text='Clear')
             case 'French':
                 self.lb_title.configure(image='',text='Tapez votre texte ci-dessous')
                 self.lb_flag.configure(image=lf.img_fr_flag)
+                self.bt_limpar.configure(text='Effacer')
             case 'German':
                 self.lb_title.configure(image='',text='Geben Sie unten Ihren Text ein')
                 self.lb_flag.configure(image=lf.img_de_flag)
+                self.bt_limpar.configure(text='Löchen')
             case 'Indonesian':
                 self.lb_title.configure(image='',text='Ketik teks Anda di bawah ini')
                 self.lb_flag.configure(image=lf.img_id_flag)
             case 'Italian':
                 self.lb_title.configure(image='',text='Digita il testo qui sotto')
                 self.lb_flag.configure(image=lf.img_it_flag)
+                self.bt_limpar.configure(text='Chiarire')
             case 'Japanese':
                 self.lb_title.configure(image=lf.img_jp_lang,text='')
                 self.lb_flag.configure(image=lf.img_jp_flag)
+                self.bt_limpar.configure(text='????')
             case 'Korean':
                 self.lb_title.configure(image=lf.img_kr_lang,text='')
                 self.lb_flag.configure(image=lf.img_kr_flag)
@@ -111,12 +131,14 @@ class App(ctk.CTk):
             case 'Portuguese':
                 self.lb_title.configure(image='',text='Escreva seu texto abaixo')
                 self.lb_flag.configure(image=lf.img_pt_flag)
+                self.bt_limpar.configure(text='Limpar')
             case 'Russian':
                 self.lb_title.configure(image=lf.img_ru_lang,text='')
                 self.lb_flag.configure(image=lf.img_ru_flag)
             case 'Spanish':
                 self.lb_title.configure(image='',text='Escribe tu texto abajo')
                 self.lb_flag.configure(image=lf.img_sp_flag)
+                self.bt_limpar.configure(text='Limpiar')
             case 'Taiwanese':
                 self.lb_title.configure(image=lf.img_tw_lang,text='')
                 self.lb_flag.configure(image=lf.img_tw_flag)

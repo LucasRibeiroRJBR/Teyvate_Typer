@@ -1,13 +1,13 @@
-import customtkinter as ctk
+import customtkinter
 
-class App(ctk.CTk):
-    def __init__(self):
-        super().__init__()
+app = customtkinter.CTk()
+app.grid_rowconfigure(0, weight=1)
+app.grid_columnconfigure(0, weight=1)
 
-        self.geometry('300x300')
+def slider_event(value):
+    print(value)
 
-        self.lb = ctk.CTkLabel(master=self,text='Metninizi aşağıya yazın')
-        self.lb.grid(row=0,column=0)
+slider = customtkinter.CTkSlider(app, from_=0, to=100, command=slider_event)
+slider.pack()
 
-if __name__ == '__main__':
-    App().mainloop()
+app.mainloop()
