@@ -1,5 +1,3 @@
-
-
 mondstadt = ("Teyvat Neue",30)
 genshin = ("HYWenHei-85W",36,'bold')
 genshin_dropdown = ("HYWenHei-85W",16,'bold')
