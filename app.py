@@ -29,10 +29,6 @@ class App(ctk.CTk):
         # Frame
         self.frame_text = ctk.CTkFrame(master=self,border_width=3,width=180,height=400)
         self.lb_letreiro = ctk.CTkLabel(master=self.frame_text,text='',font=f.mondstadt,justify='center',width=180,height=400,wraplength=700)
-        self.vSliderTextSize = ctk.IntVar()
-        self.slider_text_size = ctk.CTkSlider(master=self.frame_text,from_=0,to=100,number_of_steps=100,command=self.font_size,orientation='vertical',variable=self.vSliderTextSize)
-        self.slider_text_size.set(18)
-        self.lb_TextFont = ctk.CTkLabel(master=self.frame_text,text=self.vSliderTextSize.get())
         
         
         # ButtonRadios
@@ -69,8 +65,6 @@ class App(ctk.CTk):
         self.frame_text.grid_columnconfigure(0,weight=2)
         self.frame_text.grid_columnconfigure(1,weight=1)
         self.lb_letreiro.grid(row=0,column=0,padx=5,pady=5)
-        self.slider_text_size.grid(row=0,column=1,sticky='se',padx=15)
-        self.lb_TextFont.grid(row=2,column=1,sticky='w',pady=15)
 
     def limpar(self):
         self.vText=''
